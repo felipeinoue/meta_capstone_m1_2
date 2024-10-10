@@ -1,65 +1,34 @@
-import logo from "../images/logo footer.png"
-import { NAVLINKS } from "../lib";
+import logo from "../images/logoFooter.png"
+import Menu from "./Menu";
 
 function Footer() {
-  const infos = [
+  const menus = [
     {
       title: "Doormat Navigation",
-      links: NAVLINKS
+      links: "Home\nAbout\nMenu\nReservations\nOrder Online\nLogin"
     },
     {
       title: "Contact",
-      links: [
-        {
-          name: "Address",
-          href: "#"
-        },
-        {
-          name: "Phone Number email",
-          href: "#"
-        },
-      ]
+      links: "Address\nPhone number\nemail"
     },
     {
       title: "Social Media Links",
-      links: [
-        {
-          name: "Facebook",
-          href: "#"
-        },
-        {
-          name: "Linkedin",
-          href: "#"
-        },
-        {
-          name: "Instagram",
-          href: "#"
-        },
-      ]
+      links: "Facebook\nInstagram\nLinkedin"
     },
   ]
 
   return (
     <footer>
-      <img src={logo} alt="logo" height={100} />
-      <ul>
-        {
-          infos.map( info =>
-            <li>
-              <p>{info.title}</p>
-              {
-                info.links.map( link => 
-                  <li>
-                    <a href={link.href} key={link.name}>
-                      {link.name}
-                    </a>
-                  </li>
-                )
-              }
-            </li>
-          )
-        }
-      </ul>
+      <div className="cont">
+        <img src={logo} alt="logo" />
+        <div className="menus">
+          {
+            menus.map( menu =>
+              <Menu menu={menu} key={menu.title} />
+            )
+          }
+        </div>
+      </div>
     </footer>
   );
 }

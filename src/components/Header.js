@@ -6,8 +6,10 @@ import logo from "../images/Logo.svg"
 function Header() {
   return (
     <header>
-      <img src={logo} alt="logo" />
-      <Nav />
+      <div>
+        <img src={logo} alt="logo" />
+        <Nav />
+      </div>
     </header>
   );
 }

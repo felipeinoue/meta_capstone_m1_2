@@ -1,4 +1,3 @@
-// import './App.css';
 
 import { NAVLINKS } from "../lib";
 
@@ -9,8 +8,11 @@ function Nav() {
       <ul>
         {
           NAVLINKS.map( link => 
-            <li>
-              <a href={link.href} key={link.name}>
+            <li key={link.name}>
+              <a 
+                className='lead-text'
+                href={link.href} 
+              >
                 {link.name}
               </a>
             </li>
