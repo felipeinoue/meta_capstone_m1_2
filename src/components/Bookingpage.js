@@ -1,36 +1,30 @@
 // import './App.css';
 
-import { useEffect, useReducer, useState } from "react";
+import { useReducer } from "react";
 import BookingForm from "./BookingForm";
-import { fetchAPI } from "../api";
+import { fetchAPI, submitAPI } from "../api";
+import { getTodayDate } from "./lib";
+import { useNavigate } from "react-router-dom";
 
 function BookingPage() {
-  // const [formFields, setFormFields] = useState({
-  //   date: "",
-  //   time: "",
-  //   guests: 1,
-  //   occasion: "Any",
-  // })
+  const navigate = useNavigate()
 
-  const updateTimes = (state, selectedDate) => {
-    return fetchAPI( selectedDate )
+  const updateTimes = (state, date) => {
+    return fetchAPI( new Date ( date ) )
   }
 
   const initializeTimes = () => {
-    // returns available times for today's date
-    return fetchAPI( new Date() )
+    return fetchAPI( new Date( getTodayDate() ) )
   }
 
   const [availableTimes, dispatch] = useReducer(updateTimes, initializeTimes())
 
-  useEffect(() => {
-    const a = new Date()
-    console.log(a)
-    return () => {
-      // second
+  const submitForm = (formData) => {
+    const subtmitOk = submitAPI(formData)
+    if (subtmitOk) {
+      navigate("/confirmationpage")
     }
-  }, [])
-  
+  }
 
   return (
     <main className="BookingPage">
@@ -39,8 +33,7 @@ function BookingPage() {
         <BookingForm 
           availableTimes = {availableTimes}
           updateTimes = {dispatch}
-          // fields = {formFields}
-          // setFields = {setFormFields}
+          submitForm={submitForm}
         />
       </div>
     </main>

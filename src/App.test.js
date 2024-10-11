@@ -10,6 +10,9 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import BookingForm from "./components/BookingForm";
 import BookingPage from "./components/Bookingpage";
+import { BrowserRouter } from "react-router-dom";
+import { fetchAPI } from "./api";
+import { getTodayDate } from "./components/lib";
 
 // test('Renders the BookingForm heading', () => {
 //     render(<BookingPage />);
@@ -19,16 +22,10 @@ import BookingPage from "./components/Bookingpage";
 
 test('initializeTimes function returns the expected times', () => {
 
-  render(<BookingPage />)
+  render(<BrowserRouter> <BookingPage /> </BrowserRouter>)
 
-  const expectedTimes = [
-    "17:00",
-    "18:00",
-    "19:00",
-    "20:00",
-    "21:00",
-    "22:00",
-  ]
+  const expectedTimes = fetchAPI( new Date( getTodayDate() ) )
+  console.log(expectedTimes)
 
   expectedTimes.forEach(time => {
     const option = screen.getByRole('option', {name: time})
@@ -36,21 +33,16 @@ test('initializeTimes function returns the expected times', () => {
   });
 })
 
-test('update times function returns the expeted times', () => {
+test('update times function returns the expected times', () => {
 
-  render(<BookingPage />)
+  render(<BrowserRouter> <BookingPage /> </BrowserRouter>)
 
-  const expectedTimes = [
-    "17:00",
-    "18:00",
-    "19:00",
-    "20:00",
-    "21:00",
-    "22:00",
-  ]
+  const date = "2024-04-05"
 
   const dateInput = screen.getByLabelText(/Choose date/)
-  fireEvent.change(dateInput, { target: { value: "2024/02/01" } })
+  fireEvent.change(dateInput, { target: { value: date } })
+
+  const expectedTimes = fetchAPI( new Date( date ) )
 
   expectedTimes.forEach(time => {
     const option = screen.getByRole('option', {name: time})

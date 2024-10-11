@@ -1,40 +1,58 @@
 // import './App.css';
 
-import { useState } from "react";
+import { useState } from "react"
+import { getTodayDate } from "./lib"
+
+// import { useState } from "react";
 
 
 function BookingForm({
   availableTimes,
   updateTimes,
-  // formFields,
+  submitForm,
 }) {
-  const [date, setDate] = useState("")
-  const [time, setTime] = useState("")
-  const [guests, setGuests] = useState(1)
-  const [occasion, setOccasion] = useState("Any")
+  const [formData, setFormData] = useState({
+    date: getTodayDate(),
+    time: "",
+    guests: 1,
+    occasion: "Any",
+  })
 
-  const handleDateChange = (e) => {
-    const selectedDate = e.target.value
-    setDate(selectedDate)
-    updateTimes(new Date(selectedDate))
+  const handleChanges = (e) => {
+    setFormData( (prevData) => ({...prevData, [e.target.name]: e.target.value}) )
+  }
+
+  const handleDateChanges = (e) => {
+    updateTimes(e.target.value)    
+    handleChanges(e)
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    submitForm(formData)
   }
 
   return (
-    <form className="BookingForm">
+    <form
+      className="BookingForm"
+      onSubmit={handleSubmit}
+    >
       <div className="section">
         <label className="lead-text" htmlFor="res-date">Choose date</label>
         <input 
           type="date" 
           id="res-date" 
-          value={date}
-          onChange={ (e) => handleDateChange(e) }
+          value={formData.date}
+          name="date"
+          onChange={ (e) => handleDateChanges(e) }
         />
       </div>
       <div className="section">
         <label className="lead-text" htmlFor="res-time">Choose time</label>
         <select id="res-time "
-          value={time}
-          onChange={ (e) => setTime(e.target.value) }
+          value={formData.time}
+          name="time"
+          onChange={ (e) => handleChanges(e) }
         >
           {
             availableTimes.map( availableTime =>
@@ -51,16 +69,18 @@ function BookingForm({
           min="1" 
           max="10" 
           id="guests" 
-          value={guests}
-          onChange={ (e) => setGuests(e.target.value) }
+          value={formData.guests}
+          name="guests"
+          onChange={ (e) => handleChanges(e) }
         />
       </div>
       <div className="section">
         <label className="lead-text" htmlFor="occasion">Occasion</label>
         <select 
           id="occasion"
-          value={occasion}
-          onChange={ (e) => setOccasion(e.target.value) }
+          value={formData.occasion}
+          name="occasion"
+          onChange={ (e) => handleChanges(e) }
         >
             <option>Any</option>
             <option>Birthday</option>
