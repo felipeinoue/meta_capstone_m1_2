@@ -1,16 +1,18 @@
-import Footer from "./Footer";
-import Header from "./Header";
-import Main from "./Main";
+// import './App.css';
 
+import About from "./About";
+import Hero from "./Hero";
+import Highlights from "./Highlights";
+import Testimonials from "./Testimonials";
 
 function Homepage() {
-
   return (
-    <>
-      <Header />
-      <Main />
-      <Footer />
-    </>
+    <main>
+      <Hero />
+      <Highlights />
+      <Testimonials />
+      <About />
+    </main>
   );
 }
 

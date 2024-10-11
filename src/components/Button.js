@@ -1,8 +1,8 @@
 // import './App.css';
 
-function Button({children}) {
+function Button({children, onClick}) {
   return (
-    <button className="button lead-text">
+    <button onClick={onClick} className="button lead-text">
       {children}
     </button>
   );
