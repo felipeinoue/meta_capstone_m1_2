@@ -18,7 +18,7 @@ function Hero() {
             <h2 className="sub-title" >Chicago</h2>
           </div>
           <p className="lead-text">{description}</p>
-          <Button onClick={ () => navigate("/reservations") }>Reserve a table</Button>
+          <Button onClick={ () => navigate("/bookingpage") }>Reserve a table</Button>
         </div>
         <img src={hero} alt="hero" />
       </div>

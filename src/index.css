@@ -364,9 +364,9 @@ footer .menus {
   gap: 10px;
 }
 
-/* Reserve */
+/* BookingPage */
 
-.reserve {
+.BookingPage {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -376,7 +376,7 @@ footer .menus {
   background-color: var(--color-secondary-rose);
 }
 
-.reserve .cont {
+.BookingPage .cont {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -385,20 +385,22 @@ footer .menus {
   width: 900px;
 }
 
-.reserve form {
+/* BookingForm */
+
+.BookingForm {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 0px;
-  gap: 40px;
+  gap: 70px;
   width: 100%;
 }
 
-.reserve form * {
+.BookingForm * {
   color: var(--color-highlight-black);
 }
 
-.reserve form .section {
+.BookingForm .section {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -407,7 +409,7 @@ footer .menus {
   width: 100%;
 }
 
-.reserve input, select, option {
+.BookingForm input, select, option {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -419,7 +421,7 @@ footer .menus {
   border: none;
 }
 
-input[type="submit"] {
+.BookingForm input[type="submit"] {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -433,7 +435,7 @@ input[type="submit"] {
   cursor: pointer;
 }
 
-input[type="submit"]:hover {
+.BookingForm input[type="submit"]:hover {
   background-color: var(--color-highlight-black);
   color: var(--color-primary-yellow);
 }

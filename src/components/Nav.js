@@ -18,7 +18,7 @@ function Nav() {
     },
     {
       name: "Reservations",
-      href: "/reservations"
+      href: "/bookingpage"
     },
     {
       name: "Order Online",
