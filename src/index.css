@@ -435,7 +435,26 @@ footer .menus {
   cursor: pointer;
 }
 
-/* .BookingForm input[type="submit"]:hover {
-  background-color: var(--color-highlight-black);
-  color: var(--color-primary-yellow);
-} */
+/* ConfirmedBooking */
+
+.ConfirmedBooking {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  background-color: var(--color-secondary-rose);
+}
+
+.ConfirmedBooking .cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 350px 0px;
+  gap: 80px;
+  width: 900px;
+}
+
+.ConfirmedBooking h1 {
+  color: var(--color-highlight-black);
+}

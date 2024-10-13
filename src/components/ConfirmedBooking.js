@@ -5,7 +5,7 @@ function ConfirmedBooking() {
   return (
     <main className="ConfirmedBooking">
       <div className="cont">
-        <h1>Your booking has been confirmed</h1>
+        <h1 className="title">Your table has been confirmed!</h1>
       </div>
     </main>
   );
