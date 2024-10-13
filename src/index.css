@@ -435,7 +435,7 @@ footer .menus {
   cursor: pointer;
 }
 
-.BookingForm input[type="submit"]:hover {
+/* .BookingForm input[type="submit"]:hover {
   background-color: var(--color-highlight-black);
   color: var(--color-primary-yellow);
-}
+} */

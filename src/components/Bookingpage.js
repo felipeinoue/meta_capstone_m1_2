@@ -3,7 +3,6 @@
 import { useReducer } from "react";
 import BookingForm from "./BookingForm";
 import { fetchAPI, submitAPI } from "../api";
-import { getTodayDate } from "./lib";
 import { useNavigate } from "react-router-dom";
 
 function BookingPage() {
@@ -14,7 +13,7 @@ function BookingPage() {
   }
 
   const initializeTimes = () => {
-    return fetchAPI( new Date( getTodayDate() ) )
+    return []
   }
 
   const [availableTimes, dispatch] = useReducer(updateTimes, initializeTimes())

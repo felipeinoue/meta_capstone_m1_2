@@ -1,10 +1,26 @@
 // import './App.css';
 
 import { useState } from "react"
-import { getTodayDate } from "./lib"
 
 // import { useState } from "react";
 
+const dateIsInThePast = (date) => {
+  // check that date is older than current date
+
+  // get given date
+  const g = date.split("-")
+  const gY = parseInt(g[0])
+  const gM = parseInt(g[1])
+  const gD = parseInt(g[2])
+
+  // get current date
+  const c = new Date()
+  const cY = c.getFullYear()
+  const cM = c.getMonth() + 1
+  const cD = c.getDate()
+
+  return (gY < cY) | (gY === cY && gM < cM) || (gY === cY && gM === cM && gD < cD)
+}
 
 function BookingForm({
   availableTimes,
@@ -12,10 +28,10 @@ function BookingForm({
   submitForm,
 }) {
   const [formData, setFormData] = useState({
-    date: getTodayDate(),
+    date: "",
     time: "",
     guests: 1,
-    occasion: "Any",
+    occasion: "",
   })
 
   const handleChanges = (e) => {
@@ -23,6 +39,13 @@ function BookingForm({
   }
 
   const handleDateChanges = (e) => {
+
+    // do nothing if date is in the past
+    if (dateIsInThePast(e.target.value)) {
+      alert("Date can't be in the past")      
+      return
+    }
+
     updateTimes(e.target.value)    
     handleChanges(e)
   }
@@ -30,6 +53,16 @@ function BookingForm({
   const handleSubmit = (e) => {
     e.preventDefault()
     submitForm(formData)
+  }
+
+  const disableSubmit = () => {
+    // disable submit if any test is true
+    const dateInPast = dateIsInThePast(formData.date)
+    const dateIsEmpty = formData.date === ""
+    const timeIsEmpty = formData.time === ""
+    const guestsOutOfRange = formData.guests < 1 && formData.guests > 10
+    const occasionIsEmpty = formData.occasion === ""
+    return dateInPast || dateIsEmpty || timeIsEmpty || guestsOutOfRange || occasionIsEmpty
   }
 
   return (
@@ -45,6 +78,7 @@ function BookingForm({
           value={formData.date}
           name="date"
           onChange={ (e) => handleDateChanges(e) }
+          required={true}
         />
       </div>
       <div className="section">
@@ -53,7 +87,9 @@ function BookingForm({
           value={formData.time}
           name="time"
           onChange={ (e) => handleChanges(e) }
+          required={true}
         >
+          <option>{""}</option>
           {
             availableTimes.map( availableTime =>
               <option key={availableTime} >{availableTime}</option>
@@ -72,6 +108,7 @@ function BookingForm({
           value={formData.guests}
           name="guests"
           onChange={ (e) => handleChanges(e) }
+          required={true}
         />
       </div>
       <div className="section">
@@ -81,13 +118,20 @@ function BookingForm({
           value={formData.occasion}
           name="occasion"
           onChange={ (e) => handleChanges(e) }
+          required={true}
         >
-            <option>Any</option>
-            <option>Birthday</option>
-            <option>Anniversary</option>
-        </select>
+          <option></option>
+          <option>Birthday</option>
+          <option>Anniversary</option>
+      </select>
       </div>
-      <input className="lead-text" type="submit" value="Make Your reservation" />
+      <input 
+        className="lead-text" 
+        type="submit" 
+        value="Make Your reservation" 
+        disabled={disableSubmit()}
+        style={{ cursor: disableSubmit() ? "auto" : "pointer" }}
+      />
     </form>
   );
 }
